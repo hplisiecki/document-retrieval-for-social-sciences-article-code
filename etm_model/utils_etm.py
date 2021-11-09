@@ -9,7 +9,6 @@
   year={2019}
 }
 
-import torch
 import numpy as np
 
 def get_topic_diversity(beta, topk):
