@@ -9,7 +9,7 @@ import os
 import torch
 import pickle
 
-# computes the saturation of the entirety of each subcorpus 
+# computes the saturation of the entirety of each subcorpus
 
 def load_obj(name ):
     with open(name + '.pkl', 'rb') as f:
@@ -33,13 +33,7 @@ def get_all_data(docs, vocab):
 
 
 
-    # corpus = pd.read_csv('democracy/saturation_experiment.csv')
-    # a = corpus
-    # corpus = corpus[corpus['demok_counts']>0]
-    # corpus = corpus[corpus['kto'] != 'Marszałek (przebieg posiedzenia)']
-    # corpus = corpus[corpus['kto'] != 'Marszałek']
-    # corpus = corpus[corpus['klub'] == 'PiS']
-    # corpus = corpus[corpus['term']>3]
+
 
     # Create count vectorizer
     print('counting document frequency of words...')
@@ -53,52 +47,19 @@ def get_all_data(docs, vocab):
     sum_counts_np = np.zeros(v_size, dtype=int)
     for v in range(v_size):
         sum_counts_np[v] = sum_counts[0,v]
-    # word2id = dict([(w, cvectorizer.vocabulary_.get(w)) for w in cvectorizer.vocabulary_])
-    # id2word = dict([(cvectorizer.vocabulary_.get(w), w) for w in cvectorizer.vocabulary_])
+
     del cvectorizer
     print('  initial vocabulary size: {}'.format(v_size))
 
-    # Sort elements in vocabulary
-    # idx_sort = np.argsort(sum_counts_np)
-    # vocab_aux = vocab
-    # vocab_aux = [id2word[idx_sort[cc]] for cc in range(v_size)]
 
-    # with open("stopwords.txt", "rb") as input_file:
-    #     stops = pickle.load(input_file)
-    #
-    # with open("surnames.txt", "rb") as fp:
-    #    surnames = pickle.load(fp)
-
-
-
-    # Filter out stopwords (if any)
-    # vocab_aux = [w for w in vocab_aux if w not in stops]
-    # vocab_aux = [w for w in vocab_aux if w not in surnames]
-    # vocab_aux = [w for w in vocab_aux if w in vocab]
-    # vocab_aux = [w for w in vocab_aux if w not in parts.keys()]
-
-    # print('  vocabulary size after removing stopwords from list: {}'.format(len(vocab_aux)))
-    # print('  vocabulary after removing stopwords: {}'.format(len(vocab_aux)))
-
-    # Create dictionary and inverse dictionary
-    # vocab = vocab_aux
-    # del vocab_aux
     word2id = dict([(w, j) for j, w in enumerate(vocab)])
     id2word = dict([(j, w) for j, w in enumerate(vocab)])
 
-    # Split in train/test/valid
     print('tokenizing documents and splitting into train/test/valid...')
     num_docs = cvz.shape[0]
-    # trSize = int(np.floor(0.85*num_docs))
-    # tsSize = int(np.floor(0.10*num_docs))
-    # vaSize = int(num_docs - trSize - tsSize)
-    del cvz
-    # idx_permute = np.random.permutation(num_docs).astype(int)
 
-    # Remove words not in train_data
-    # vocab = list(set([w for idx_d in range(trSize) for w in docs[idx_permute[idx_d]].split() if w in word2id]))
-    # word2id = dict([(w, j) for j, w in enumerate(vocab)])
-    # id2word = dict([(j, w) for j, w in enumerate(vocab)])
+    del cvz
+
     print('  vocabulary after removing words not in train: {}'.format(len(vocab)))
 
 
