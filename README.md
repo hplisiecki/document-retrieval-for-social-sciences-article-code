@@ -18,3 +18,7 @@ To recreate the project's work do the following:
 5. Use the model_results.py script to calculate the model results
 6. Run the saturate.py script to generate model topic saturations for each of the subcorpora
 7. Run the correlate_subsets.py script to generate the correlation matrix
+
+## Implementation
+
+The accompanying implementation script is meant to be a simple implementation of the best performing saturation method to be used in research by social scientists from different walks of life.
