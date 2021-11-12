@@ -82,7 +82,7 @@ for value in corpus.index[:cut_off]:
     
     
 ##############################
-########   save it  ##########
+########   save it   #########
 ##############################
 
 fig = venn(dictionary, figsize =(11, 11) )
