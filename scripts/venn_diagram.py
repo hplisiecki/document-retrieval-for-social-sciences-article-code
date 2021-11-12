@@ -79,4 +79,12 @@ corpus = corpus.sort_values(by = [f'dem_tfidf_mean_words_saturation'], ascending
 tfidf = corpus.index[:cut_off]
 for value in corpus.index[:cut_off]:
     dictionary.setdefault(f'{name}', set()).add(value)
+    
+    
+##############################
+########   save it  ##########
+##############################
+
+fig = venn(dictionary, figsize =(11, 11) )
+fig.figure.savefig("graphs/venn_all.svg", format="svg",transparent=True, dpi = 1200)
 
