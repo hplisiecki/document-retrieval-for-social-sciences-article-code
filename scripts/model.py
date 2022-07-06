@@ -64,6 +64,8 @@ def parser(path_load, saturation, save):
     args = parser.parse_known_args()
     return args
 
+##### THE BELOW FILES ARE LANGUAGE AND CORPUS SPECIFIC
+
 with open("../stopwords.txt", "rb") as fp:  # load the stopwords
    stop_words = pickle.load(fp)
 
