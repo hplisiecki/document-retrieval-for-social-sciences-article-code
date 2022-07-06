@@ -1,5 +1,5 @@
 # Saturation Methods
-This is code that accompanies a paper titled "Finding democracy in big data: word-embedding-based document retrieval"
+This code accompanies a paper titled "Finding democracy in big data: word-embedding-based document retrieval"
 
 
 ## Dependencies
@@ -13,8 +13,8 @@ The dataset used for the final validation can be found at https://osf.io/rk6pc/
 ## Scripts
 
 The raw data used for this project has not been released yet. The dataset mentioned in the last section  
-constitutes a subset of the raw data, necessary to replicate the validation analyses, in order to do that  
-proceed from the 4th step of the list below. If, on the other hand you plan to replicate the analysis  
+constitutes a subset of the raw data, necessary to replicate the validation analyses - in order to do that  
+proceed from the 4th step of the list below. If, on the other hand, you plan to replicate the analysis  
 using a different dataset, proceed from the 1st step.
 
 To recreate the project's work do the following: 
@@ -29,4 +29,5 @@ To recreate the project's work do the following:
 
 ## Implementation
 
-The accompanying implementation script is meant to be a simple implementation of the best performing saturation method to be used in research by social scientists from different walks of life.
+The best ranking method has been implemented in a Python package "retfidf" avaliable at:
+https://pypi.org/project/retfidf/
