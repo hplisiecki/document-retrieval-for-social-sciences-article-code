@@ -24,7 +24,7 @@ To recreate the project's work do the following:
 4. Run the model.py script to train the models
 5. Use the model_results.py script to calculate the model results
 6. Run the saturate.py script to generate model topic saturations for each of the subcorpora
-7. Run the correlate_subsets.py script to generate the correlation matrix
+7. Run the R script
 8. Run the venn_diagram.py script to generate the Venn diagram
 
 ## Implementation
