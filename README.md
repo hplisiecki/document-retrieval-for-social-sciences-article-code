@@ -23,9 +23,8 @@ To recreate the project's work do the following:
 3. Run the hollowing_out.py script to generate subcorpora for training
 4. Run the model.py script to train the models
 5. Use the model_results.py script to calculate the model results
-6. Run the saturate.py script to generate model topic saturations for each of the subcorpora
-7. Run the R script
-8. Run the venn_diagram.py script to generate the Venn diagram
+6. Run the R script to generate the correlation table
+7. Run the venn_diagram.py script to generate the Venn diagram
 
 ## Implementation
 
