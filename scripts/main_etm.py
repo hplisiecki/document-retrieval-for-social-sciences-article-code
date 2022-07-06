@@ -1,12 +1,12 @@
 
 # main file for the embedded topic model by:
 
-@article{dieng2019topic,
-  title={Topic modeling in embedding spaces},
-  author={Dieng, Adji B and Ruiz, Francisco J R and Blei, David M},
-  journal={arXiv preprint arXiv:1907.04907},
-  year={2019}
-}
+# @article{dieng2019topic,
+#   title={Topic modeling in embedding spaces},
+#   author={Dieng, Adji B and Ruiz, Francisco J R and Blei, David M},
+#   journal={arXiv preprint arXiv:1907.04907},
+#   year={2019}
+# }
 
 from __future__ import print_function
 

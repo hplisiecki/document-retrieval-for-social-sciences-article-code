@@ -11,8 +11,8 @@ import torch
 from gensim import corpora
 from gensim.utils import simple_preprocess
 
-corpus = pd.read_csv('C:\\Users\\hplis\\PycharmProjects\\data_10_04(1).csv')
-word2vec = KeyedVectors.load('our_vectors.kv')
+corpus = pd.read_csv('C:\\Users\\hplis\\PycharmProjects\\coherence\\data\\data_11_23(1).csv')
+word2vec = KeyedVectors.load('..\our_vectors.kv')
 doc_tokenized = [simple_preprocess(doc) for doc in corpus['text']]
 
 ########################################################################################################################
@@ -96,7 +96,7 @@ corpus['tfidf_embeddings'] = tfidf_emb
 #                 SAVE                   #
 ##########################################
 
-corpus.to_csv('after_averaging.csv')
+corpus.to_csv('data/after_averaging.csv')
 
 
 

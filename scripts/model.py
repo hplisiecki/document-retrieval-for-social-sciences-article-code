@@ -15,9 +15,9 @@ from main_etm import etm_training
 # Create embeddings and preprocess data for modelling
 
 
-#######################################################################################
+########################################################################################################################
 #                     Load the stpip install --upgrade setuptoolsopwords and define utility functions                 #
-#######################################################################################
+########################################################################################################################
 
 def parser(path_load, saturation, save):
     parser = argparse.ArgumentParser(description='The Embedded Topic Model')
@@ -64,13 +64,13 @@ def parser(path_load, saturation, save):
     args = parser.parse_known_args()
     return args
 
-with open("stopwords.txt", "rb") as fp:  # load the stopwords
+with open("../stopwords.txt", "rb") as fp:  # load the stopwords
    stop_words = pickle.load(fp)
 
-with open("surnames.txt", "rb") as fp:
+with open("../surnames.txt", "rb") as fp:
    surnames = pickle.load(fp)
 
-with open("partie.txt", "rb") as fp:  # load the stopwords
+with open("../partie.txt", "rb") as fp:  # load the stopwords
    parts = pickle.load(fp)
 
 
@@ -140,12 +140,18 @@ def create_embeddings(docs, name, save):
 #              Preprocess the demok saturation and train embeddings                   #
 #######################################################################################
 
-save = 'core/'
+
+
+
+save = 'core1/'
 def load_obj(name ):
     with open(name + '.pkl', 'rb') as f:
         return pickle.load(f)
 
-dictionary = load_obj('prepared_set')
+dictionary = load_obj('../prepared_set')
+
+
+
 
 print('Preprocessing data 1/5...')
 
@@ -158,10 +164,20 @@ min_df = 10
 print('reading data...')
 
 
-corpus = pd.read_csv('after_saturation.csv')
+corpus = pd.read_csv('data/after_saturation.csv')
+#############################
+cut_off = len(corpus[corpus['demok_counts'] != 0])
+names = ['count', 'separate words', 'ten words', 'norm mean', 'tfidf mean']
+sorting_names = ['demok_counts', 'dem_all_words_saturation', 'dem_ten_words_saturation', 'dem_norm_mean_words_saturation', 'dem_tfidf_mean_words_saturation']
 
+for name, sorting in zip(names, sorting_names):
+    corpus = corpus.sort_values(by = [sorting], ascending = False)
+    demok = corpus.index[:cut_off]
+    for value in corpus.index[:cut_off]:
+        dictionary.setdefault(f'{name}', set()).add(value)
+##############################
 # set the name
-saturation = 'demok'
+saturation = 'count'
 
 path_save = save + './min_df_' + str(min_df) + saturation + '/'
 if not os.path.isdir(path_save):
@@ -172,7 +188,7 @@ docs = list(corpus[corpus.index.isin(dictionary[saturation])]['text'])
 digest(docs, path_save, min_df, max_df)
 
 print('Creating embeddings 1/5...')
-create_embeddings(corpus[corpus.index.isin(dictionary[saturation])]['text'], 'baseline', save)
+create_embeddings(corpus[corpus.index.isin(dictionary[saturation])]['text'], saturation, save)
 
 
 
@@ -183,7 +199,7 @@ create_embeddings(corpus[corpus.index.isin(dictionary[saturation])]['text'], 'ba
 
 print('Preprocessing data 2/5...')
 
-saturation = 'ten'
+saturation = 'ten words'
 
 path_save = save + './min_df_' + str(min_df) + saturation + '/'
 if not os.path.isdir(path_save):
@@ -203,7 +219,7 @@ create_embeddings(corpus[corpus.index.isin(dictionary[saturation])]['text'], sat
 
 print('Preprocessing data 3/5...')
 
-saturation = 'all'
+saturation = 'separate words'
 
 path_save = save + './min_df_' + str(min_df) + saturation + '/'
 if not os.path.isdir(path_save):
@@ -223,7 +239,7 @@ create_embeddings(corpus[corpus.index.isin(dictionary[saturation])]['text'], sat
 
 print('Preprocessing data 4/5...')
 
-saturation = 'tfidf_mean'
+saturation = 'tfidf mean'
 
 path_save = save + './min_df_' + str(min_df) + saturation + '/'
 if not os.path.isdir(path_save):
@@ -243,7 +259,7 @@ create_embeddings(corpus[corpus.index.isin(dictionary[saturation])]['text'], sat
 
 print('Preprocessing data 5/5...')
 
-saturation = 'norm_mean'
+saturation = 'norm mean'
 
 path_save = save + './min_df_' + str(min_df) + saturation + '/'
 if not os.path.isdir(path_save):
@@ -274,19 +290,19 @@ print('Lets train the models.')
 
 print('Training the demok model')
 
-saturation = 'demok'
+saturation = 'count'
 
 path_load = save + './min_df_' + str(min_df) + saturation
 
 args = parser(path_load, saturation ,save)
 args[0].mode = 'train'
-etm_training(args[0], 'baseline.kv')
+etm_training(args[0], f'{saturation}.kv')
 
 #   TEN WORDS
 
 print('Training the ten model')
 
-saturation = 'ten'
+saturation = 'ten words'
 
 path_load = save + './min_df_' + str(min_df) + saturation
 
@@ -298,7 +314,7 @@ etm_training(args[0], f'{saturation}.kv')
 
 print('Training the all model')
 
-saturation = 'all'
+saturation = 'separate words'
 
 path_load = save + './min_df_' + str(min_df) + saturation
 
@@ -310,7 +326,7 @@ etm_training(args[0], f'{saturation}.kv')
 
 print('Training the norm model')
 
-saturation = 'norm_mean'
+saturation = 'norm mean'
 
 path_load = save + './min_df_' + str(min_df) + saturation
 
@@ -322,7 +338,7 @@ etm_training(args[0], f'{saturation}.kv')
 
 print('Training the tfidf model')
 
-saturation = 'tfidf_mean'
+saturation = 'tfidf mean'
 
 path_load = save + './min_df_' + str(min_df) + saturation
 

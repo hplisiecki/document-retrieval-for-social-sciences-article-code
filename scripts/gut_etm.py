@@ -1,12 +1,12 @@
 
 # data preprocessing file for the embedded topic model by:
 
-@article{dieng2019topic,
-  title={Topic modeling in embedding spaces},
-  author={Dieng, Adji B and Ruiz, Francisco J R and Blei, David M},
-  journal={arXiv preprint arXiv:1907.04907},
-  year={2019}
-}
+# @article{dieng2019topic,
+#   title={Topic modeling in embedding spaces},
+#   author={Dieng, Adji B and Ruiz, Francisco J R and Blei, David M},
+#   journal={arXiv preprint arXiv:1907.04907},
+#   year={2019}
+# }
 
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
@@ -55,10 +55,10 @@ def digest(docs, path_save, min_df, max_df):
     idx_sort = np.argsort(sum_counts_np)
     vocab_aux = [id2word[idx_sort[cc]] for cc in range(v_size)]
 
-    with open("stopwords.txt", "rb") as input_file:
+    with open("../stopwords.txt", "rb") as input_file:
         stops = pickle.load(input_file)
 
-    with open("surnames.txt", "rb") as fp:
+    with open("../surnames.txt", "rb") as fp:
         surnames = pickle.load(fp)
 
 

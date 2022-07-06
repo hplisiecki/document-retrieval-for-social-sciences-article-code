@@ -1,11 +1,16 @@
 # hollow out the dataset by removing the common set of the first 50000 documents in each saturation method
 
 import pandas as pd
+import matplotlib
+matplotlib.use('TKAgg')
 from venn import venn
+import seaborn as sns
+import matplotlib.pyplot as plt
 from tqdm import tqdm
+import pickle
 
 
-corpus = pd.read_csv('after_saturation.csv')
+corpus = pd.read_csv('scripts/data/after_saturation.csv')
 
 ############################################################
 #                 Calculate the common set                #
@@ -13,7 +18,7 @@ corpus = pd.read_csv('after_saturation.csv')
 
 # create a dictionary with the indexes of the first 50000 documents in each saturation method
 dictionary = {}
-cut_off = 50000
+cut_off = 15185
 
 ##############################
 ######       COUNT      ######
@@ -86,6 +91,10 @@ for value in tqdm(corpus.index):
     if common == True:
         common_set.append(value)
 
+# get the common set
+common = corpus[corpus.index.isin(common_set)]
+# save
+common.to_csv('scripts/data/common_set.csv')
 # create a dictionary with the indexes of the empty set
 
 empty = {}
@@ -95,12 +104,10 @@ for key in dictionary.keys():
         if value not in common_set:
             empty.setdefault(f'{key}', set()).add(value)
 
-a = corpus[corpus.index.isin(empty['demok'])]
-
-corpus = pd.read_csv('after_saturation.csv')
+empty_df = corpus[corpus.index.isin(empty['count'])]
 
 # the cut-off is determined by the ammount of documents with at least one occurence of the "demok" stem
-cut_off = 7377
+cut_off = len(empty_df[empty_df['demok_counts'] > 0])
 
 # create a dictionary with the indexes of the hollow set
 prepared_set = {}
@@ -116,11 +123,12 @@ for key in empty.keys():
         prepared_set.setdefault(f'{key}', set()).add(value)
 
 # plot the hollow set
-venn(prepared_set)
+fig = venn(prepared_set, figsize =(11, 11) )
+fig.figure.savefig("graphs/ven_hollow.svg", format="svg",transparent=True, dpi = 1200)
 
 # save the dictionary with the indexes of the hollow set
 def save_obj(obj, name ):
-    with open( name + '.pkl', 'wb') as f:
+    with open(name + '.pkl', 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
 save_obj(prepared_set, 'prepared_set')

@@ -9,8 +9,8 @@ from gensim.utils import simple_preprocess
 
 print('Loading the necessary files...')
 
-corpus = pd.read_csv('after_averaging.csv')
-word2vec = KeyedVectors.load('our_vectors.kv')
+corpus = pd.read_csv('data/after_averaging.csv')
+word2vec = KeyedVectors.load('../our_vectors.kv')
 doc_tokenized = [simple_preprocess(doc) for doc in corpus['text']]
 
 ########################################################################################################################
@@ -37,7 +37,7 @@ doc_tokenized = [simple_preprocess(doc) for doc in corpus['text']]
 #                     Count the occurences of the "demok" stem                        #
 # ######################################################################################
 import pickle
-with open("partie.txt", "rb") as fp:  # load the stopwords
+with open("../partie.txt", "rb") as fp:  # load the stopwords
    parts = pickle.load(fp)
 
 print('Calculating the occurences of the demok stem...')
@@ -47,14 +47,14 @@ for i in tqdm(corpus.text):
     temp = i
     for j in parts:
         if j in temp:
-            temp =  temp.replace(j, '')
+            temp = temp.replace(j, '')
     texts.append(temp)
 
 del temp
 
 count = []
 for i in tqdm(texts):
-    count.append(i.count('demok'))
+    count.append(i.count('demok') / len(i.split(' ')))
 
 corpus['demok_counts'] = count
 
@@ -94,6 +94,8 @@ for i in corpus.index:
 
 corpus['dem_all_words_saturation'] = dem_all
 
+del corpus['dem_val']
+del corpus['misses']
 
 
 
@@ -117,7 +119,7 @@ for doc in tqdm(doc_tokenized):
     if val == 0:
         dem_val.append(None)
     else:
-        dem_val.append(val)
+        dem_val.append(val / len(doc))
 
 
 
@@ -171,7 +173,7 @@ del dem_val
 
 print('Saving...')
 
-corpus.to_csv('after_saturation.csv')
+corpus.to_csv('data/after_saturation.csv')
 
 print(' The saturation calculations are finished.')
 

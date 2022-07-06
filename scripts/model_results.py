@@ -6,7 +6,7 @@ import argparse
 
 # computes the results for the given model
 
-save = 'core/'
+save = 'core1/'
 
 # Maximum / minimum document frequency
 max_df = 0.7
@@ -57,9 +57,9 @@ def parser(path_load, saturation, save):
     args = parser.parse_known_args()
     return args
 
-# saturation = 'demok', 'norm_mean', 'tfidf_mean', 'all', 'ten'
+# saturation = 'count', 'norm mean', 'tfidf_mean', 'all', 'ten'
 
-saturation = 'norm_mean'
+saturation = 'tfidf mean'
 path_load = save + './min_df_' + str(min_df) + saturation
 
 args = parser(path_load, saturation ,save)
