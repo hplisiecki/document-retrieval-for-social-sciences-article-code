@@ -15,7 +15,8 @@ The dataset used for the final validation can be found at https://osf.io/rk6pc/
 The raw data used for this project has not been released yet. The dataset mentioned in the last section  
 constitutes a subset of the raw data, necessary to replicate the validation analyses - in order to do that  
 proceed from the 4th step of the list below. If, on the other hand, you plan to replicate the analysis  
-using a different dataset, proceed from the 1st step.
+using a different dataset, proceed from the 1st step. The code to analyze the Hungarian speeches  
+is not released as it was identical to the one used fo polish speeches.
 
 To recreate the project's work do the following: 
 1. Run the averaging.py script to generate the document embeddings
