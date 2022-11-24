@@ -27,6 +27,8 @@ To recreate the project's work do the following:
 6. Run the R script to generate the correlation table
 7. Run the venn_diagram.py script to generate the Venn diagram
 
+The for_osf.py script was used to generate the files available at https://osf.io/rk6pc/
+
 ## Implementation
 
 The best ranking method has been implemented in a Python package "retfidf" avaliable at:
