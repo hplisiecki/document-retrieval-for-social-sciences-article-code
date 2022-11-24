@@ -15,7 +15,7 @@ corpus = pd.read_csv('C:\\Users\\hplis\\PycharmProjects\\coherence\\data\\data_1
 ## tHIS DATA HAS NOT BEEN RELEASED YET.
 ## YOU HAVE TO USE YOUR OWN DATA TO REPLICATE THE ANALYSIS.
 
-word2vec = KeyedVectors.load('..\our_vectors.kv')
+word2vec = KeyedVectors.load('..\vectors_pl.kv')
 # THE VECTORS HAVE BEEN TRAINED ON THE ORIGINAL DATA, AND ARE AVAILABLE AT THE OSF REPOSITORY
 doc_tokenized = [simple_preprocess(doc) for doc in corpus['text']]
 
